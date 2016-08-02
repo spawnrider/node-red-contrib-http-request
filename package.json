@@ -1,0 +1,47 @@
+{
+  "name": "node-red-contrib-http-request",
+  "version": "0.1.1",
+  "description": "A Node-RED node for performing http(s) requests that use request api with optimized proxy support.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spawnrider/node-red-contrib-http-request.git"
+  },
+  "keywords": [
+    "node-red",
+    "http",
+    "https",
+    "request",
+    "proxy"
+  ],
+  "author": {
+    "name": "Yohann Ciurlik",
+    "email": "spawnrider@gmail.com",
+    "url": "https://github.com/spawnrider"
+  },
+  "contributors": [{
+      "name": "Yohann Ciurlik",
+      "email": "spawnrider@gmail.com",
+      "url": "https://github.com/spawnrider"
+},
+    {
+      "name": "Mohamed Chekir",
+      "email": "medchkir@gmail.com",
+      "url": "https://github.com/medchkir"
+}],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spawnrider/node-red-contrib-http-request/issues"
+  },
+  "node-red": {
+    "nodes": {
+      "www-request": "www-request.js"
+    }
+  },
+  "dependencies": {
+    "request": "^2.74.0"
+  },
+  "homepage": "https://github.com/mikakaraila/node-red-contrib-opcua#readme",
+  "scripts": {
+    "test": "karma start opcua.conf.js --log-level debug --single-run"
+  }
+}
