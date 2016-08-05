@@ -62,10 +62,11 @@ module.exports = function (RED) {
       }
       var opts = {
         method: method,
-        uri: url,
+        url: url,
         timeout: node.reqTimeout,
         headers: {}
       };
+
       if (msg.headers) {
         for (var v in msg.headers) {
           if (msg.headers.hasOwnProperty(v)) {
@@ -76,6 +77,22 @@ module.exports = function (RED) {
               name = v;
             }
             opts.headers[name] = msg.headers[v];
+          }
+        }
+      }
+
+      if (msg.payload && (method == "POST" || method == "PUT" || method == "PATCH")) {
+          opts.form = msg.payload;
+        } else {
+          if (typeof msg.payload === "string" || Buffer.isBuffer(msg.payload)) {
+            opts.body = msg.payload;
+          } else if (typeof msg.payload == "number") {
+            opts.body = msg.payload + "";
+          } else {
+            opts.body = JSON.stringify(msg.payload);
+            if (opts.headers['content-type'] == null) {
+              opts.headers['content-type'] = "application/json";
+            }
           }
         }
       }
