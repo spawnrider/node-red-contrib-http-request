@@ -82,6 +82,7 @@ module.exports = function (RED) {
       }
 
       if (msg.payload && (method == "POST" || method == "PUT" || method == "PATCH")) {
+        if (opts.headers['content-type'] == 'application/x-www-form-urlencoded') {
           opts.form = msg.payload;
         } else {
           if (typeof msg.payload === "string" || Buffer.isBuffer(msg.payload)) {
@@ -140,8 +141,8 @@ module.exports = function (RED) {
             var ms = diff[0] * 1e3 + diff[1] * 1e-6;
             var metricRequestDurationMillis = ms.toFixed(3);
             node.metric("duration.millis", msg, metricRequestDurationMillis);
-            if (res.client && res.client.bytesRead) {
-              node.metric("size.bytes", msg, res.client.bytesRead);
+            if (response.connection && response.connection.bytesRead) {
+              node.metric("size.bytes", msg, response.connection.bytesRead);
             }
           }
           if (node.ret === "bin") {
