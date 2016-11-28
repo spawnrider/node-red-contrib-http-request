@@ -135,6 +135,7 @@ module.exports = function (RED) {
           }
         } else {
           msg.payload = body;
+          msg.headers = response.headers;
           if (node.metric()) {
             // Calculate request time
             var diff = process.hrtime(preRequestTimestamp);
