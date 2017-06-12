@@ -31,6 +31,11 @@
     </div>
 
     <div class="form-row">
+        <input type="checkbox" id="node-input-follow-redirects" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-input-follow-redirects" style="width: auto" data-i18n="httpin.follow-redirects"></label>
+    </div>
+
+    <div class="form-row">
         <input type="checkbox" id="node-input-usetls" style="display: inline-block; width: auto; vertical-align: top;">
         <label for="node-input-usetls" style="width: auto" data-i18n="httpin.use-tls"></label>
         <div id="node-row-tls" class="hide">
@@ -103,6 +108,7 @@
             method:{value:"GET"},
             ret: {value:"txt"},
             url:{value:""},
+            "follow-redirects":{value:true},
             tls: {type:"tls-config",required: false}
         },
         credentials: {

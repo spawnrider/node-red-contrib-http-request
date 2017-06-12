@@ -8,6 +8,7 @@ module.exports = function (RED) {
     RED.nodes.createNode(this, n);
     var node = this;
     var nodeUrl = n.url;
+    var nodeFollowRedirects = n["follow-redirects"];
     var isTemplatedUrl = (nodeUrl || "").indexOf("{{") != -1;
     var nodeMethod = n.method || "GET";
     if (n.tls) {
@@ -64,6 +65,7 @@ module.exports = function (RED) {
         method: method,
         url: url,
         timeout: node.reqTimeout,
+        followRedirect: nodeFollowRedirects,
         headers: {}
       };
 
