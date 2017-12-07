@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-http-request",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "A Node-RED node for performing http(s) requests that use Request library with optimized proxy support.",
   "repository": {
     "type": "git",
