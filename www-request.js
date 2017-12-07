@@ -66,7 +66,8 @@ module.exports = function (RED) {
         url: url,
         timeout: node.reqTimeout,
         followRedirect: nodeFollowRedirects,
-        headers: {}
+        headers: {},
+        encoding: null,
       };
 
       if (msg.headers) {
@@ -149,15 +150,16 @@ module.exports = function (RED) {
               node.metric("size.bytes", msg, response.connection.bytesRead);
             }
           }
-          if (node.ret === "bin") {
-            msg.payload = new Buffer(msg.payload, "binary");
-          } else if (node.ret === "obj") {
-            try {
-              msg.payload = JSON.parse(msg.payload);
-            } catch (e) {
-              node.warn(RED._("httpin.errors.json-error"));
+
+          if (node.ret !== "bin") {
+            msg.payload = msg.payload.toString('utf8'); // txt
+
+            if (node.ret === "obj") {
+              try { msg.payload = JSON.parse(msg.payload); } // obj
+              catch(e) { node.warn(RED._("httpin.errors.json-error")); }
             }
           }
+          
           node.send(msg);
         }
       })
