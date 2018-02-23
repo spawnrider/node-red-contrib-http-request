@@ -38,7 +38,8 @@
     }
   },
   "dependencies": {
-    "request": "^2.74.0"
+    "request": "^2.74.0",
+    "mustache": "^2.2.1"
   },
   "homepage": "https://github.com/spawnrider/node-red-contrib-http-request"
 }

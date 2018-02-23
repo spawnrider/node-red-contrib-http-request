@@ -1,6 +1,7 @@
 "use strict";
 
 var request = require('request');
+var mustache = require("mustache");
 
 module.exports = function (RED) {
 
