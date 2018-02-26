@@ -107,7 +107,7 @@ module.exports = function (RED) {
           user: this.credentials.user,
           pass: this.credentials.password,
           sendImmediately: false
-        }
+        };
       }
 
       if (tlsNode) {
@@ -163,7 +163,7 @@ module.exports = function (RED) {
           
           node.send(msg);
         }
-      })
+      });
     });
   }
 
@@ -177,4 +177,4 @@ module.exports = function (RED) {
       }
     }
   });
-}
+};
