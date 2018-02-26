@@ -103,7 +103,7 @@ module.exports = function (RED) {
       }
 
       if (node.ret === "obj") {
-        opts.headers.accept = "application/json, text/plain";
+        opts.headers.accept = "application/json, text/plain;q=0.9, */*;q=0.8";
       }
 
       if (this.credentials && this.credentials.user) {
