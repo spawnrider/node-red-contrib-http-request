@@ -102,7 +102,7 @@ module.exports = function (RED) {
         }
       }
 
-      if (node.ret === "obj") {
+      if (!("accept" in opts.headers) && node.ret === "obj") {
         opts.headers.accept = "application/json, text/plain;q=0.9, */*;q=0.8";
       }
 
