@@ -102,6 +102,10 @@ module.exports = function (RED) {
         }
       }
 
+      if (node.ret === "obj") {
+        opts.headers.accept = "application/json, text/plain";
+      }
+
       if (this.credentials && this.credentials.user) {
         opts.auth = {
           user: this.credentials.user,
