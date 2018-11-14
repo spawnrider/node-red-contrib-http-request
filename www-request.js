@@ -119,6 +119,11 @@ module.exports = function (RED) {
         tlsNode.addTLSOptions(opts);
       }
 
+      // Allow custom options from message
+      if (msg.request && msg.request.options && typeof(msg.request.options) === "object") {
+        Object.assign(opts, msg.request.options);
+      }
+
       request(opts, function (error, response, body) {
         node.status({});
         if (error) {
