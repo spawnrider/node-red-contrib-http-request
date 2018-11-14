@@ -2,6 +2,7 @@
 
 var request = require('request');
 var mustache = require("mustache");
+var url = require('url');
 
 module.exports = function (RED) {
 
@@ -30,14 +31,14 @@ module.exports = function (RED) {
         text: "httpin.status.requesting"
       });
 
-      var url = nodeUrl || msg.url;
+      var inputUrl = nodeUrl || msg.url;
       if (msg.url && nodeUrl && (nodeUrl !== msg.url)) { // revert change below when warning is finally removed
         node.warn(RED._("common.errors.nooverride"));
       }
       if (isTemplatedUrl) {
-        url = mustache.render(nodeUrl, msg);
+        inputUrl = mustache.render(nodeUrl, msg);
       }
-      if (!url) {
+      if (!inputUrl) {
         node.error(RED._("httpin.errors.no-url"), msg);
         node.status({
           fill: "red",
@@ -46,12 +47,12 @@ module.exports = function (RED) {
         });
         return;
       }
-      // url must start http:// or https:// so assume http:// if not set
-      if (!((url.indexOf("http://") === 0) || (url.indexOf("https://") === 0))) {
+      // url must start will a protocol so assume http:// if not set
+      if (!url.parse(inputUrl).protocol) {
         if (tlsNode) {
-          url = "https://" + url;
+          inputUrl = "https://" + inputUrl;
         } else {
-          url = "http://" + url;
+          inputUrl = "http://" + inputUrl;
         }
       }
 
@@ -64,7 +65,7 @@ module.exports = function (RED) {
       }
       var opts = {
         method: method,
-        url: url,
+        url: inputUrl,
         timeout: node.reqTimeout,
         followRedirect: nodeFollowRedirects,
         headers: {},
@@ -132,7 +133,7 @@ module.exports = function (RED) {
             }, 10);
           } else {
             node.error(error, msg);
-            msg.payload = error.toString() + " : " + url;
+            msg.payload = error.toString() + " : " + inputUrl;
             msg.statusCode = error.code;
             node.send(msg);
             node.status({
