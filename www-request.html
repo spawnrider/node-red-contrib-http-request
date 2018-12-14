@@ -76,14 +76,15 @@
 
 <script type="text/x-red" data-help-name="www-request">
     <p>Provides a node for making http requests.</p>
-    <p>The URL and HTTP method can be configured in the node, if they are left blank they should be set in an incoming message on <code>msg.url</code> and <code>msg.method</code>:</p>
+    <p>The URL and HTTP method can be configured in the node, if they are left blank they should be set in an incoming message on <code>msg.url</code> and <code>msg.method</code>. Below is the full list of options available:</p>
     <ul>
-        <li><code>url</code>, if set, is used as the url of the request. Must start with http: or https:</li>
-        <li><code>method</code>, if set, is used as the HTTP method of the request.
-        Must be one of <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> (default: GET)</li>
-        <li><code>headers</code>, if set, should be an object containing field/value
-        pairs to be added as request headers</li>
-        <li><code>payload</code> is sent as the body of the request</li>
+        <li><code>msg.url</code>, if set, is used as the url of the request. Must start with http: or https:</li>
+        <li><code>msg.method</code>, if set, is used as the HTTP method of the request.
+        Must be one of <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> (default: GET).</li>
+        <li><code>msg.headers</code>, if set, should be an object containing field/value
+        pairs to be added as request headers.</li>
+        <li><code>msg.payload</code> is sent as the body of the request.</li>
+        <li><code>msg.request.options</code> is set as options of the request. Please refer to the documentation of request module. <strong>Use only when you know what you are doing as this will override options derived by the node.</strong></li>
     </ul>
     <p>When configured within the node, the URL property can contain <a href="http://mustache.github.io/mustache.5.html" target="_new">mustache-style</a> tags. These allow the
     url to be constructed using values of the incoming message. For example, if the url is set to
