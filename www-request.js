@@ -115,6 +115,14 @@ module.exports = function (RED) {
         };
       }
 
+      if (this.credentials && (this.credentials.user==null)) {
+        opts.auth = {
+          user: "",
+          pass: this.credentials.password,
+          sendImmediately: false
+       };
+      }
+
       if (tlsNode) {
         tlsNode.addTLSOptions(opts);
       }
