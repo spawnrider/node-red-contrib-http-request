@@ -302,6 +302,7 @@
         "basicauth": "Use basic authentication",
         "use-tls": "Enable secure (SSL/TLS) connection",
         "follow-redirects": "Follow redirects",
+        "persistent-http": "HTTP persistent connections",
         "tls-config":"TLS Configuration",
         "utf8": "a UTF-8 string",
         "binary": "a binary buffer",
